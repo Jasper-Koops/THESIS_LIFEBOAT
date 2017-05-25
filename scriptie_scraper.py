@@ -112,7 +112,7 @@ def analysed_save_to_db(result_title, title, excerpt, article_type, no_pages, do
     c.execute("""
             INSERT INTO saved_data
             (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date INT) VALUES
-            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms,estimated_publication_date INT))
+            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms,estimated_publication_date))
     data.commit()
 
 
