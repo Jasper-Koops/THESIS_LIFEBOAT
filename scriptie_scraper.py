@@ -111,7 +111,7 @@ def analysed_save_to_db(result_title, title, excerpt, article_type, no_pages, do
 
     c.execute("""
             INSERT INTO saved_data
-            (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date INT) VALUES
+            (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date) VALUES
             (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", (result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms,estimated_publication_date))
     data.commit()
 
@@ -389,7 +389,8 @@ def analyser(text, RANGE, keywords, accuracy):
             #DEZE TRY EXCEPT LOOP MAAKT DAT HET PROGRAMMA WERKT
             #MAAR DE BUG VERTRAAGT HET PROGRAMMA ECHT ENORM.
             try:
-                first_catch_of_today.remove(that)
+                #first_catch_of_today.remove(that)
+                first_catch_of_today.remove(this)
                 print("Too simular, removing...")
                 REMOVED +=1
             except:
@@ -458,6 +459,50 @@ def iterator(keywords, search_range, accuracy):
             for key in keywords:
                 abstract_text, number_of_results = analyser(document_text, search_range, key, accuracy)
                 number_of_mentions += number_of_results
+
+                if abstracts == None:
+                    abstracts = ""
+                abstracts += abstract_text
+                abstracts += "\n\n"
+
+                #Calculate NORMALIZED_number_of_mentions
+                NORMALIZED_number_of_mentions = number_of_mentions / no_pages
+
+
+            #Hercalculeer hier de rank, het heeft enige peformance penalty om dat hier in te code te doen, maar g dit is veel duidelijker
+
+
+            #Calculeer hier het jaartal (apparte functie)  #VOEG COLUMN TOE
+
+            #Maak hier de graphs? Of in de functie
+            #En op een database van enkele honderden documenten (en sowieso al een paar uur analyse tijd) maakt dit echt geen ene reet uit.
+            print(abstracts)
+            analysed_save_to_db(result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date)
+
+        except:
+            print("Row analysis failed for some reasons, skipping...")
+
+    #AAN HET EINDE VAN HET PROGRAMMA DE BALANS OPMAKEN
+
+    #fetch keyword
+    #fetch min jaartaal
+    #fetch max jaartaal
+    #loop over min tot max (stappen van 1 jaar )
+        #selecteer entry die dat jaartal heeft en selecteer hits
+        #Maak graph met keyword als titel
+        #Save en done
+
+        #Doe het zelfde waar je hits door pagenumbers deelt (gebruik normalized niet, die zijn voor totalen )
+
+
+
+
+
+#RUN THE PROGRAM
+menu()
+
+
+
 
 #                 #maak hier de hitdict per keyword, moet hier want we moeten data hebben die straks word opgeslagen
 
@@ -557,45 +602,3 @@ def iterator(keywords, search_range, accuracy):
 #                 #     hitdict['key'] = int(number_of_mentions)
 #                 # else:
 #                 #     pass
-
-
-
-                if abstracts == None:
-                    abstracts = ""
-                abstracts += abstract_text
-                abstracts += "\n\n"
-
-                #Calculate NORMALIZED_number_of_mentions
-                NORMALIZED_number_of_mentions = number_of_mentions / no_pages
-
-
-            #Hercalculeer hier de rank, het heeft enige peformance penalty om dat hier in te code te doen, maar g dit is veel duidelijker
-
-
-            #Calculeer hier het jaartal (apparte functie)  #VOEG COLUMN TOE
-
-            #Maak hier de graphs? Of in de functie
-            #En op een database van enkele honderden documenten (en sowieso al een paar uur analyse tijd) maakt dit echt geen ene reet uit.
-            analysed_save_to_db(result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date)
-
-        except:
-            print("Row analysis failed for some reasons, skipping...")
-
-    #AAN HET EINDE VAN HET PROGRAMMA DE BALANS OPMAKEN
-
-    #fetch keyword
-    #fetch min jaartaal
-    #fetch max jaartaal
-    #loop over min tot max (stappen van 1 jaar )
-        #selecteer entry die dat jaartal heeft en selecteer hits
-        #Maak graph met keyword als titel
-        #Save en done
-
-        #Doe het zelfde waar je hits door pagenumbers deelt (gebruik normalized niet, die zijn voor totalen )
-
-
-
-
-
-#RUN THE PROGRAM
-menu()
