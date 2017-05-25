@@ -349,7 +349,7 @@ def keyword_graph_maker(key, years):
 def publication_date_determiner(string):
     """Scans the document title for the last valid date and assumes that as the publication date"""
 
-    estimated_publication_date = int(re.findall('(19)\d\d|(18)\d\d', string)[-1])
+    estimated_publication_date = int(re.findall('19\d\d|18\d\d', string)[-1])
     if estimated_publication_date > 1960:
         estimated_publication_date = None
 
@@ -460,6 +460,10 @@ def iterator(keywords, search_range, accuracy):
                 number_of_mentions += number_of_results
 
 #                 #maak hier de hitdict per keyword, moet hier want we moeten data hebben die straks word opgeslagen
+
+
+
+
 #                 #list als value met daarin dicts van jaar en value
 #
 #                 #Append dictlist with list of the following values
@@ -554,6 +558,8 @@ def iterator(keywords, search_range, accuracy):
 #                 # else:
 #                 #     pass
 
+
+
                 if abstracts == None:
                     abstracts = ""
                 abstracts += abstract_text
@@ -587,7 +593,7 @@ def iterator(keywords, search_range, accuracy):
 
         #Doe het zelfde waar je hits door pagenumbers deelt (gebruik normalized niet, die zijn voor totalen )
 
-        keyword_graph_maker(key, years
+
 
 
 
