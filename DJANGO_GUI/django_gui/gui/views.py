@@ -19,5 +19,14 @@ def document_detail(request, id):
     """Displays the document overview"""
 
     document = SavedData.objects.get(row_id=id)
+    abstract_list = []
+    for paragraph in document.abstracts.split('\n'):
+        abstract_list.append(paragraph)
+
     return render(request, 'gui/document_detail.html', {
-    'document': document})
+    'document': document, 'abstracts': abstract_list})
+
+
+def saved_docs(request):
+    documents = SavedData.objects.filter(read_status = 1)
+    return render(request, 'gui/saved_docs.html', {'database': documents})

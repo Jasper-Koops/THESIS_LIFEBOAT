@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 
 
 #TODO:
+# Voeg row_id generator in
+# Voeg read_status generator in
+
 #Scan titel (1e titel, die er atlijd is) voor het LAATSTE genoemde jaartal.
 #Geef het artikel dat getal als jaartal in kolom.
 #creer (PER ZOEKWOORD) een datatime lijngrafiek van hoeveel hits ze in de loop der tijd krijgen

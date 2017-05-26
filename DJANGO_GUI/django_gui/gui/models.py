@@ -29,6 +29,10 @@ class SavedData(models.Model):
     used_search_terms = models.TextField(blank=True, null=True)
     estimated_publication_date = models.IntegerField(blank=True, null=True)
     row_id = models.IntegerField(blank=True, null=False, primary_key=True)
+    read_status = models.IntegerField(blank=True, null=False)
+
+    def __str__(self):
+        return self.row_id
 
     class Meta:
         managed = True

@@ -12,7 +12,13 @@
   <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#summary_expand"><h4>Summary </h4></button>
   <div id="summary_expand" class="collapse">
 
-    <p> {{ document.abstracts }} </p>
+    {% for summary in abstracts %}
+        <p>{{ summary }}</p>
+        
+
+    {% endfor %}
+
+    <!-- <pre> {{ document.abstracts }} </pre> -->
 
   </div>
 

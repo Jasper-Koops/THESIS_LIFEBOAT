@@ -29,6 +29,7 @@ class SavedData(models.Model):
     used_search_terms = models.TextField(blank=True, null=True)
     estimated_publication_date = models.IntegerField(blank=True, null=True)
     row_id = models.IntegerField(blank=True, null=True, primary_key=True)
+    saved = models.IntegerField(blank=True, null=True) #Voeg je later toe. Filter je later voor een lijst uit. 
 
     class Meta:
         managed = True

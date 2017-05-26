@@ -20,6 +20,7 @@ from . import views
 urlpatterns = [
 
     url(r'^$', views.database, name='database'),
+    url(r'^saveddocs$', views.saved_docs, name='saved_docs'),
 
     url(r'^database/(?P<id>\d+)/$', views.document_detail, name='document_detail'),
 

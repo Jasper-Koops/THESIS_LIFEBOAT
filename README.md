@@ -56,7 +56,17 @@ The program extract the text surrounding the occurance of each search term (capi
 
 # Will there be a GUI interface? 
 
-Yes. I am working on a django based interface that should make searching through the results a breeze. It will present a table that ranks all the pages on the 'normalized number of mentions' variable (the number of keyword occurances divided by the number of pages) and the user will be able to click on any article to view the article information, the relevant portions, the entire document text and a link to the file itself. 
+Yes! The first prototype has just been uploaded, here are some screenshots. 
+
+![Alt text](/images/gui1.png?raw=true "Downloading the files...")
+
+The GUI is essentially a table, ranked and sorted based on the 'normalized number of mentions' variable. From here the user is able to click on the articles within the database to view the 'document overview' page. On this page the user can view the article information, the relevant portions, the entire document text and a link to the file itself. 
+The formatting of the actual text still needs some work though, to migitage the 'wall of text' syndrome that is currently going on. 
+
+![Alt text](/images/gui2.png?raw=true "Downloading the files...")
+
+Loading the database currently is anything but a seemless experience, recuiring the use of the 'row_id_generator.py' before loading the file with the 'python3 manage.py inspectdb > modelspy' command. 
+So its still a prototype, but its already usable. 
 
 # Does it work? 
 
