@@ -128,7 +128,7 @@ def scraper(url):
 
         while True:
             scraper_pause_length = random.randint(5,10)
-            print("pausing for %d seconds to avoid detection" % scraper_pause_length)
+            print("\n\npausing for %d seconds to avoid detection" % scraper_pause_length)
             time.sleep(scraper_pause_length) #Crash voorkomen
             res = requests.get(url)
             soup = BeautifulSoup(res.text, 'lxml')
@@ -143,7 +143,7 @@ def scraper(url):
                 for text in title:
                     title = text.text
                     if len(title) < 1:
-                        title = "NO TITLE"
+                        title = "file has no subtitle"
                 #find and store the excerpt text to variable
                 excerpt = item.find('span',{'class': None}).text
                 #find and store the article type to variable
@@ -223,7 +223,7 @@ def fetcher():
 
         #Download files and read contents
         try:
-            if title == 'NO TITLE':
+            if title == 'file has no subtitle':
                 alto_title = str(result_title)
                 if len(alto_title) > 120:
                     print("Filename too long, intervening...")
@@ -259,7 +259,8 @@ def fetcher():
             pdf_url = "00000 ERROR  ERROR  ERROR  ERROR ERROR"
             c.execute('UPDATE saved_data SET pdf_url=? WHERE result_title = ?', (pdf_url,result_title,))
 
-        print(title)
+        print("Subtitle: %s" % title)
+        print("\n")
         data.commit()
 
 
@@ -291,8 +292,8 @@ def downloader(url, alto_title):
     html_link = html_link.attrs['href']
     #ALTO DOWNLOAD MANIER
     # open in binary mode
-    print(pdf_link)
-    print(alto_title)
+    #print(pdf_link)
+    print("file found!\nTITLE: %s\nURL: %s" % (alto_title, pdf_link))
     with open(alto_title, "wb") as file:
         # get request
         print("Downloading...")
@@ -349,8 +350,11 @@ def keyword_graph_maker(key, years):
 def publication_date_determiner(string):
     """Scans the document title for the last valid date and assumes that as the publication date"""
 
-    estimated_publication_date = int(re.findall('19\d\d|18\d\d', string)[-1])
-    if estimated_publication_date > 1960:
+    try:
+        estimated_publication_date = int(re.findall('19\d\d|18\d\d', string)[-1])
+        if estimated_publication_date > 1960:
+            estimated_publication_date = None
+    except:
         estimated_publication_date = None
 
     return estimated_publication_date
@@ -476,7 +480,7 @@ def iterator(keywords, search_range, accuracy):
 
             #Maak hier de graphs? Of in de functie
             #En op een database van enkele honderden documenten (en sowieso al een paar uur analyse tijd) maakt dit echt geen ene reet uit.
-            print(abstracts)
+
             analysed_save_to_db(result_title, title, excerpt, article_type, no_pages, document_link, fetched_on, document_text, pdf_url, enhanced_on, abstracts, article_rank, number_of_mentions, NORMALIZED_number_of_mentions, date_of_analysis, used_search_terms, estimated_publication_date)
 
         except:
