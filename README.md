@@ -65,7 +65,7 @@ Yes. I have it running as we speak and have worked through thousands of document
 # I want to use this program, but for different research, can I use this program? 
 
 Yes. The downloading and fetching process is based on the website of the archive, so you should replace thhose parts with your own code. 
-The analyzer and summarizer should work on any pdf that you throw at it. 
+The analyzer and summarizer should work on any pdf that you throw at it. I have created a seperate script that contains just the analyzer.
 
 
 
