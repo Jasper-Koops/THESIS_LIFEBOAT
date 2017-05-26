@@ -1,0 +1,30 @@
+{% extends 'gui/base.html' %}
+
+{% block content %}
+<div class="container">
+
+  <h2> {{ document.result_title }} </h2>
+  <h3> {{ document.title }} </h3>
+  <h3> <a href="{{ document.pdf_url }}">Download PDF</a></h3>
+  <p>Year of publication (estimated) {{ document.estimated_publication_date }} </p>
+
+
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#summary_expand"><h4>Summary </h4></button>
+  <div id="summary_expand" class="collapse">
+
+    <p> {{ document.abstracts }} </p>
+
+  </div>
+
+  <br>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#full_text_expand"><h4>Full Text </h4></button>
+  <div id="full_text_expand" class="collapse">
+
+
+    <p> {{ document.document_text|linebreaksbr }} </p>
+
+  </div>
+
+</div>
+
+{% endblock %}

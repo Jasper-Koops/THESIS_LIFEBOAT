@@ -1,0 +1,38 @@
+{% extends 'gui/base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Subtitle</th>
+        <th>Hits</th>
+        <th>Hits (normalized)</th>
+        <th>Keywords</th>
+        <th>(Estimated) publication date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for document in database %}
+      <tr>
+        <td><h4><a href="{% url 'document_detail' id=document.row_id %}">{{ document.result_title }}</a></h4></td>
+        <td>{{ document.title }}</td>
+        <td>{{ document.number_of_mentions }}</td>
+        <td>{{ document.normalized_number_of_mentions|floatformat:2 }}</td>
+        <td>{{ document.used_search_terms }}</td>
+        <td>{{ document.estimated_publication_date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </thead>
+
+</table>
+
+</div>
+
+
+
+{% endblock %}
