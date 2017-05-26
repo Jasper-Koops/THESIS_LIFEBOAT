@@ -3,7 +3,7 @@
 # Before we get started
 
 This program is still very much a work in progress, that is being used and developed simultaneously.
-As such, the code is still of a rather poor quality with a lot of 'hackey' solutions to the problems that have emerged. 
+As such, the code is still of a rather poor quality with many untranslated comments and with a lot of 'hackey' solutions, to the problems that have emerged. 
 Normally I would not yet open this repository to the public - but after I posted about the project on reddit I received multiple requests
 to share the source code. 
 I have decided to do so, but please keep in mind that the code here is in no way representative of the final version that I plan to release somewhere this fall. 
